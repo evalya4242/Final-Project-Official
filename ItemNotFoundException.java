@@ -1,4 +1,4 @@
-public class ItemNotFoundException extends Expection {
+public class ItemNotFoundException extends Exception {
     public ItemNotFoundException(String message) {
         super(message);
     }
