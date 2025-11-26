@@ -1,17 +1,15 @@
-public class Item
-{
+public class Item {
     protected String itemId;
     protected String itemName;
     protected double price;
     protected int quantity;
-    public Item(String itemtId, String itemtName, double price, int quantity)
-    {
+
+    public Item(String itemId, String itemName, double price, int quantity) {
         this.itemId = itemId;
         this.itemName = itemName;
         this.price = price;
         this.quantity = quantity;
     }
-
 
     public String getItemId()
     {
