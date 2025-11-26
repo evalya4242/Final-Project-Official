@@ -3,36 +3,6 @@ public class InventoryManager {
     protected Item[] items = new Item[50];
     protected int count = 0;
 
-    public void addItem(Item it) {
-        if (count < items.length) {
-            items[count++] = it;
-        } else {
-            System.out.println("Inventory is MAXED OUT");
-        }
-    }
-
-    public void viewAllItems() {
-        for (int i = 0; i < count; i++) {
-            items[i].displayItemInfo();
-            System.out.println("--------------------");
-        }
-    }
-
-    public void searchItem(int id) {
-        boolean search = false; 
-
-        for (int i = 0; i < count; i++) {
-            if (items[i].itemid == id) {
-                System.out.println("Item found: " + items[i].itemid);
-                search = true;
-            }
-        }
-
-        if (search == false) {
-            System.out.println("The item is not found");
-        }
-    }
-
     public void addItem(Item it) throws InventoryFullException {
         if (count < items.length) {
             items[count++] = it;
@@ -54,6 +24,7 @@ public class InventoryManager {
 
     public void searchItem(String id) throws ItemNotFoundException {
         Item found = findItemById(id);
+        System.out.println("Item found:");
         found.displayItemInfo();
     }
 
@@ -98,25 +69,26 @@ public class InventoryManager {
         }
         throw new ItemNotFoundException("Item with ID " + id + " not found.");
     }
-    public void searchProductsByName(String namePart) {
-        String search = namePart.toLowerCase();
-        boolean found = false;
+
+    public void searchProductsByName(String productTitle) {
+        String search = productTitle.toLowerCase();
+        boolean exists = false;
 
         for (int i = 0; i < count; i++) {
-            String productName = products[i].getProductName().toLowerCase();
+            String productName = items[i].getItemName().toLowerCase();
 
             if (productName.contains(search)) {
-                if (!found) {
+                if (!exists) {
                     System.out.println("Matching products:");
                 }
                 System.out.println("---------------------");
-                products[i].displayProductInfo();
-                found = true;
+                items[i].displayItemInfo();
+                exists = true;
             }
         }
 
-        if (!found) {
-            System.out.println("No products found with name containing: " + namePart);
+        if (!exists) {
+            System.out.println("No products found with name containing: " + productTitle);
         } else {
             System.out.println("---------------------");
         }
